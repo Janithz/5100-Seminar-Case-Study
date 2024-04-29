@@ -1,0 +1,38 @@
+My prompt -
+can you fix this error? Error in importdata("ABR-0-1.txt") : could not find function "importdata"
+
+ChatGPT - 
+In R, there isn't a built-in function called importdata like in MATLAB. Instead, you can use read.table, read.csv, or similar functions to import data from text files or CSV files. Here's how you can modify the code to read data from a text file in R:
+
+r
+Copy code
+# Read the data from the file
+data <- read.table("path/to/your/file.txt", header = FALSE, skip = 15)
+
+# Check the structure of the data
+str(data)
+
+# Load ABR row data
+ABR <- read.table("ABR-0-1.txt")
+
+# Calculate size of ABR data
+s <- dim(ABR)
+fr <- 40
+frame <- 1:s[1]
+
+# Final Figure
+plot(NA, xlim = c(-5, 12.4), ylim = c(1.3, 33.1), xlab = "", ylab = "", main = "ABR Data")
+
+for (i in 1:s[2]) {
+  lines(frame/fr, ABR[, i] + (i * 4), col = "black", lwd = 1)
+}
+
+box()
+axis("off")
+Replace "path/to/your/file.txt" with the actual path to your data file in the read.table function. This code reads the specified text file, checks its structure, and then continues with the MATLAB code conversion for plotting the ABR data.
+
+OUTCOME when running the code - IT FINALLY WORKED!! but gave an error = Error in axis("off") : invalid axis number -2147483648
+In addition: Warning message:
+In axis("off") : NAs introduced by coercion
+
+
